@@ -1,7 +1,6 @@
 {
     "name": "@MOD_NAME@",
     "author": "@MOD_AUTHOR@",
-    "majorVer": @MOD_MAJOR_VER@,
-    "minorVer": @MOD_MINOR_VER@,
+    "version": "@MOD_VERSION@",
     "dllName": "@DLL_NAME@"
 }

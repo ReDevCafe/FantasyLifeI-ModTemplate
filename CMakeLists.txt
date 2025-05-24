@@ -2,15 +2,15 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 PROJECT(Mod LANGUAGES CXX C)
 
 
-set(MOD_NAME "ANiceMod")
-set(MOD_AUTHOR "CuteDev")
-set(MOD_MAJOR_VER 1)
-set(MOD_MINOR_VER 0)
+set(MOD_NAME    "ANiceMod")
+set(MOD_AUTHOR  "CuteDev")
+set(MOD_VERSION "1.0.0-REL")
 
 #########################################
 ## DO NOT TOUCH TO THE FOLLOWING LINES ##
 #########################################
 set(DLL_NAME "${MOD_NAME}.dll")
+
 add_library(${PROJECT_NAME} SHARED) 
 
 configure_file(
