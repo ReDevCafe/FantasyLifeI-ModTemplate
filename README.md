@@ -25,8 +25,7 @@ $ cmake .. -A x64
 > ```cmake
 > set(MOD_NAME "ANiceMod")
 > set(MOD_AUTHOR "CuteDev")
-> set(MOD_MAJOR_VER 1)
-> set(MOD_MINOR_VER 0)
+> set(MOD_VERSION "1.0.0-REL")
 >```
 
 ## Installing the mod
