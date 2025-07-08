@@ -3,7 +3,7 @@ A template for creating mods for Fantasy Life I using C++
 
 ## Requirements
 - Cmake 
-- MSVC (recommended)
+- MSVC (recommended (even if everyone hate microsoft c/c++ compiler))
 - x64 build configuration
 
 ## Building the mod
@@ -21,9 +21,9 @@ $ cmake .. -A x64
 
 ## Configuring Mod Info
 > [!TIP]
-> You can customize youuur mod's metadata directly in the `CMakeLists.txt` file by editing the following variables:
+> You can customize your mod's metadata directly in the `CMakeLists.txt` file by editing the following variables:
 > ```cmake
-> set(MOD_NAME "ANiceMod")
+> set(MOD_NAME "MyCuteModUwU")
 > set(MOD_AUTHOR "CuteDev")
 > set(MOD_VERSION "1.0.0-REL")
 >```
