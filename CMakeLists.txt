@@ -37,5 +37,5 @@ target_sources(${PROJECT_NAME} PUBLIC
 
 target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib)
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/lib/ModLoader.dll"
+    "${CMAKE_CURRENT_SOURCE_DIR}/lib/ModLoader.lib"
 )

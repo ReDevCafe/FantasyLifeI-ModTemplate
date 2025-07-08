@@ -1,4 +1,4 @@
-#include "ModSDK.h"
+#include "MDK.h"
 
 class MyMod : public ModBase
 {
