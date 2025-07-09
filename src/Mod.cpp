@@ -1,28 +1,34 @@
-#include "Mod.hpp"
+#include "MDK.h"
 
-static Logger* logger = nullptr;
-
-MODAPI_ENTRYPOINT void InitMod(ModAPI* api, ModObject meta)
+class MyMod : public ModBase
 {
-    logger = new Logger(meta.name, api->Log);
+    Logger* logger;
 
-    // Should output in the loader console something like: "Mod TestMod v1.0.0-ALPHA loaded!"
-    logger->warn("Mod", meta.name, " v", meta.version, " loaded!");
+    public:
 
-    while(api->GetRecipeData() == nullptr)
-        Sleep(1);
-
-    TArray<TSetElement<TPair<FName, FGDRecipeData>>> test = api->GetRecipeData()->m_dataMap.Data;
-    for (int i = 0; i < test.Count; ++i) 
+    // Called when the game start
+    void OnPreLoad() override
     {
-        try 
-        {    
-            // Put all recipes level to level 5 instantly
-            test.Data[i].Value.Second.rarity = ERarityType::Rarity6;
-        } 
-        catch (std::exception &exception) 
-        {
-            logger->error(exception.what());
-        }
+        // Creating your own logger
+        logger = new Logger("MyMod");
+        logger->info("Hellooooo");
+
+        // Retrieve the Faraway Iron item from the ModLoader cache
+        ItemData item = ModLoader::gameCache->GetItem(MATERIAL_FARAWAY_IRON);
+
+        // Print the item's english name
+        logger->info(item.GetName(LANG::ENGLISH));
+
+        // Modify item properties
+        item.SetName(LANG::ENGLISH, L"MODIFIED BY MOD");
+        item.SetQuality(EItemQualityType::EItemQualityType__Quality4);
     }
-}
+
+    // Called when the game loads the save file
+    void OnPostLoad() override
+    {
+        logger->info("Hellooooo 2");
+    }
+};
+
+MOD_EXPORT ModBase* CraftMod() { return new MyMod(); }
