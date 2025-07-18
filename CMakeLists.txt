@@ -1,16 +1,31 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
-PROJECT(FLiMod LANGUAGES CXX C)
+cmake_minimum_required(VERSION 3.10)
+project(FLiMod LANGUAGES CXX C)
 
+set(MOD_NAME            "MyMod")
+set(MOD_AUTHOR          "Me")
+set(MOD_VERSION         "1.0.0-REL")
+set(MODLOADER_VERSION   "0.01-alpha")
 
-set(MOD_NAME    "MyMod")
-set(MOD_AUTHOR  "Me")
-set(MOD_VERSION "1.0.0-REL")
+################################################
+##   DO NOT TOUCH TO THE FOLLOWING LINES      ##
+##    UNLESS YOU KNOW WHAT YOU'RE DOING       ##
+##                                            ##
+## IF THE MOD FAILS TO COMPILE AFTER CHANGES, ##
+##    PLEASE REVERT TO THE ORIGINAL STATES    ##
+################################################
 
-#########################################
-## DO NOT TOUCH TO THE FOLLOWING LINES ##
-#########################################
+set(MODLOADER_URL "https://github.com/AmeliaCute/FantasyLifeI-ModLoader/releases/download/${MODLOADER_VERSION}/ModLoader.lib")
+set(MODLOADER_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/ModLoader.lib")
+
+message(STATUS "Downloading ModLoader.lib from ${MODLOADER_URL}")
+file(DOWNLOAD ${MODLOADER_URL} ${MODLOADER_LIB_PATH} SHOW_PROGRESS STATUS DOWNLOAD_STATUS)
+
+list(GET DOWNLOAD_STATUS 0 DOWNLOAD_RESULT)
+if(NOT DOWNLOAD_RESULT EQUAL 0)
+    message(FATAL_ERROR "Failed to download ModLoader.lib (status ${DOWNLOAD_RESULT})")
+endif()
+
 add_library(${PROJECT_NAME} SHARED) 
-
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/Mod.json.in"
     "${CMAKE_CURRENT_BINARY_DIR}/Mod.json"
@@ -30,12 +45,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 file(GLOB_RECURSE PROJECT_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-
 target_sources(${PROJECT_NAME} PUBLIC
     ${PROJECT_SOURCE}
 )
 
-target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/lib)
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/lib/ModLoader.lib"
+add_library(ModLoader STATIC IMPORTED)
+set_target_properties(ModLoader PROPERTIES
+    IMPORTED_LOCATION ${MODLOADER_LIB_PATH}    
 )
+
+target_link_libraries(${PROJECT_NAME} PRIVATE ModLoader)
