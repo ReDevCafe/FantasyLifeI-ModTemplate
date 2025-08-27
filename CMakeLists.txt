@@ -4,7 +4,7 @@ project(FLiMod LANGUAGES CXX C)
 set(MOD_NAME            "MyMod")
 set(MOD_AUTHOR          "Me")
 set(MOD_VERSION         "1.0.0-REL")
-set(MODLOADER_VERSION   "0.01-alpha")
+set(MODLOADER_VERSION   "v20250827.1611")
 
 ################################################
 ##   DO NOT TOUCH TO THE FOLLOWING LINES      ##
