@@ -30,28 +30,19 @@ $ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 ## Installing the mod
 1. Build the project
 ```bash
-$ cmake --build build --config Release --target ALL_BUILD
+$ cmake --build build --config Release --target package_mod
 ```
-2. After building, create a new folder inside the Mods directory of your game
-3. Name the folder as you like 
-4. Place **both** of thee following filees inside that folder:
-- `Mod.json`
-- And the compiled Mod file (`.mod`)
-
-> [!WARNING] 
-> Both files are required for the mod to be recognized and initialized by the mod loader
+2. After building place the .fliarchive inside Game/Content/Mods
 
 > [!NOTE]  
 > ```mathematica
 > Fantasy Life I/
 > ├── Mods/
-> |   └── MyMod/
-> |       ├── Mod.json
-> |       └── MyMod.mod
+> |   └── MyMod.fliarchive
 > ```
 
 ## Troubleshooting
-1. ModLoader returns `Missing CraftMod in MyMod`
+1. ModLoader returns `Missing CraftMod in 'mymod'`
     > this means you forgot to add the following lines at the ned of your code:
     > ```cpp
     > MOD_EXPORT ModBase* CraftMod() { return new MyMod(); }
@@ -69,5 +60,5 @@ $ cmake --build build --config Release --target ALL_BUILD
     > MOD_EXPORT ModBase* CraftMod() { return new MyMod(); }
     > ```
 
-2. ModLoader returns `Failed to load: MyMod`
+2. ModLoader returns `Failed to load: 'mymod'`
     > This usually means the program was not compiled correctly. If you made changes to the `CMakeLists.txt` file, try reverting them to the original state.
