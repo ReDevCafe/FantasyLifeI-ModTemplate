@@ -1,9 +1,0 @@
-{
-    "title": "@MOD_TITLE@",
-    "identifier": "@MOD_IDENTIFIER@",
-    "author": "@MOD_AUTHOR@",
-    "version": @MOD_VERSION@,
-    "dependencies": {
-        "fliapi": 1.0
-    }
-}

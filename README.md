@@ -20,12 +20,18 @@ $ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
 ## Configuring Mod Info
 > [!TIP]
-> You can customize your mod's metadata directly in the `CMakeLists.txt` file by editing the following variables:
-> ```cmake
-> set(MOD_NAME    "MyMod")
-> set(MOD_AUTHOR  "Me")
-> set(MOD_VERSION "1.0.0-REL")
->```
+> You can customize your mod's metadata directly in the `resource/Mod.json`:
+> ```jsonc
+>{
+>    "title": "My Mod",
+>    "identifier": "mymod",
+>    "author": "Me",
+>    "version": 1.0,
+>    "dependencies": {
+>        "fliapi": 1.0
+>    }
+> }
+>
 
 ## Installing the mod
 1. Build the project

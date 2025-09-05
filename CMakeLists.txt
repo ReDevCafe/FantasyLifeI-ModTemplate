@@ -1,12 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(FLiMod LANGUAGES CXX C)
 
-set(MOD_TITLE           "My Mod")
-set(MOD_IDENTIFIER      "mymod")
-set(MOD_AUTHOR          "Me")
-set(MOD_VERSION         1.0)
-
-set(MODLOADER_VERSION   "v20250827.1611")
+set(MODLOADER_BUILD_VERSION   "v20250827.1611")
 
 ################################################
 ##   DO NOT TOUCH TO THE FOLLOWING LINES      ##
@@ -16,7 +11,7 @@ set(MODLOADER_VERSION   "v20250827.1611")
 ##    PLEASE REVERT TO THE ORIGINAL STATES    ##
 ################################################
 
-set(MODLOADER_URL "https://github.com/AmeliaCute/FantasyLifeI-ModLoader/releases/download/${MODLOADER_VERSION}/ModLoader.lib")
+set(MODLOADER_URL "https://github.com/AmeliaCute/FantasyLifeI-ModLoader/releases/download/${MODLOADER_BUILD_VERSION}/ModLoader.lib")
 set(MODLOADER_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/ModLoader.lib")
 
 message(STATUS "Downloading ModLoader.lib from ${MODLOADER_URL}")
@@ -28,12 +23,6 @@ if(NOT DOWNLOAD_RESULT EQUAL 0)
 endif()
 
 add_library(${PROJECT_NAME} SHARED) 
-configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/Mod.json.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/Mod.json"
-    @ONLY
-)
-
 set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_NAME "CompiledBin"
     SUFFIX ".bin"
@@ -58,12 +47,12 @@ set_target_properties(ModLoader PROPERTIES
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ModLoader)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/Mod.json" DESTINATION ".")
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/resource/Mod.json" DESTINATION ".")
 install(FILES "$<TARGET_FILE:${PROJECT_NAME}>" DESTINATION ".")
 
 set(CPACK_GENERATOR "ZIP")
 set(CPACK_OUTPUT_FILE_PREFIX "${CMAKE_BINARY_DIR}/packages")
-set(CPACK_PACKAGE_FILE_NAME "${MOD_IDENTIFIER}")
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}")
 set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
 include(CPack)
 find_program(CPACK_EXECUTABLE NAMES cpack)
@@ -81,10 +70,10 @@ else()
     add_custom_command(TARGET package_mod POST_BUILD
         COMMAND "${CPACK_EXECUTABLE}" -G ZIP -C $<CONFIG>
         COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/packages"
-        COMMAND ${CMAKE_COMMAND} -E remove -f "${CMAKE_BINARY_DIR}/packages/${MOD_IDENTIFIER}.fliarchive"
+        COMMAND ${CMAKE_COMMAND} -E remove -f "${CMAKE_BINARY_DIR}/packages/${PROJECT_NAME}.fliarchive"
         COMMAND ${CMAKE_COMMAND} -E rename
-                "${CMAKE_BINARY_DIR}/packages/${MOD_IDENTIFIER}.zip"
-                "${CMAKE_BINARY_DIR}/packages/${MOD_IDENTIFIER}.fliarchive"
+                "${CMAKE_BINARY_DIR}/packages/${PROJECT_NAME}.zip"
+                "${CMAKE_BINARY_DIR}/packages/${PROJECT_NAME}.fliarchive"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         VERBATIM
     )

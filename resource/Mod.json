@@ -1,0 +1,9 @@
+{
+    "title": "My Mod",
+    "identifier": "mymod",
+    "author": "Me",
+    "version": 1.0,
+    "dependencies": {
+        "fliapi": 1.0
+    }
+}
