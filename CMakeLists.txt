@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(FLiMod LANGUAGES CXX C)
 
-set(MODLOADER_BUILD_VERSION   "v20250915.2026")
+set(MODLOADER_BUILD_VERSION   "v20250827.1611")
 
 ################################################
 ##   DO NOT TOUCH TO THE FOLLOWING LINES      ##

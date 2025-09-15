@@ -1,7 +1,6 @@
-*
-!include/
-!include/**/*
-!src/
-!src/**/*
-!README.md
-!.gitignore
+build
+out
+lib
+.vs
+.vscode
+.intellij
