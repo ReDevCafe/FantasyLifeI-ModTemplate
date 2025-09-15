@@ -1,6 +1,7 @@
-build
-out
-lib
-.vs
-.vscode
-.intellij
+*
+!include/
+!include/**/*
+!src/
+!src/**/*
+!README.md
+!.gitignore
