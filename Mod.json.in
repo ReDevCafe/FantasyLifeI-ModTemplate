@@ -1,6 +1,0 @@
-{
-    "name": "@MOD_NAME@",
-    "author": "@MOD_AUTHOR@",
-    "version": "@MOD_VERSION@",
-    "dependencies": []
-}
