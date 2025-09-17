@@ -5,3 +5,5 @@
 !src/**/*
 !README.md
 !.gitignore
+!.github
+!.github/**/*
